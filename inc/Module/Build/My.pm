@@ -1,10 +1,13 @@
-package MyModuleBuild;
+package Module::Build::My;
+
+use strict;
+use warnings;
 
 use base 'Module::Build';
 
 use File::Spec;
 
-# Use FatPacker to replace *.pl file with fatpacked script
+# Replace *.pl files with ones without suffix
 
 sub process_script_files {
     my $self = shift;
@@ -18,18 +21,6 @@ sub process_script_files {
             $file =~ s/\.pl$//;
             $args{to} = File::Spec->catfile($args{to_dir}, $file);
             delete $args{to_dir};
-            no warnings 'redefine';
-            local *File::Copy::copy = sub {
-                my ($file, $dest) = @_;
-                open my $in,  "<", $file or die $!;
-                open my $out, ">", $dest or die $!;
-                local @ARGV = qw(file);
-                while (<$in>) {
-                    s/^__(?:END)__$/scalar(`$^X -e "use App::FatPacker -run_script" file`)/e;
-                    print $out $_;
-                };
-                return 1;
-            };
             return $self->SUPER::copy_if_modified(%args);
         };
         return $self->SUPER::copy_if_modified(%args);

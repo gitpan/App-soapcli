@@ -3,10 +3,9 @@ abstract: 'SOAP client for CLI with YAML and JSON input'
 author:
   - 'Piotr Roszatycki <dexter@cpan.org>'
 build_requires:
-  App::FatPacker: 0
   Test::More: 0
 dynamic_config: 1
-generated_by: 'Module::Build version 0.3901, CPAN::Meta::Converter version 2.120630'
+generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.120630'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,7 +14,7 @@ name: App-soapcli
 provides:
   App::soapcli:
     file: lib/App/soapcli.pm
-    version: 0.02
+    version: 0.0201
 requires:
   File::Slurp: 0
   Getopt::Long::Descriptive: 0
@@ -25,9 +24,9 @@ requires:
   YAML::Syck: 0
   YAML::XS: 0
   constant::boolean: 0
-  perl: 5.006
+  perl: 5.008
 resources:
-  bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=App-soapcli
+  bugtracker: http://github.com/dex4er/soapcli/issues
   license: http://dev.perl.org/licenses/
   repository: http://github.com/dex4er/soapcli
-version: 0.02
+version: 0.0201

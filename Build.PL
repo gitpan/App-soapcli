@@ -5,18 +5,19 @@ use 5.006;
 use strict;
 use warnings;
 
-use MyModuleBuild;
+use lib 'inc';
+use Module::Build::My;
 
 my $module = 'App::soapcli';
 
 (my $dist = $module) =~ s/::/-/g;
 
-my $build = MyModuleBuild->new(
+my $build = Module::Build::My->new(
     module_name             => $module,
     dist_version_from       => 'script/soapcli.pl',
     license                 => 'perl',
     requires                => {
-        'perl'                  => 5.006,
+        'perl'                  => 5.008,   # open $my
         'constant::boolean'     => 0,
         'File::Slurp'           => 0,
         'Getopt::Long::Descriptive' => 0,
@@ -27,29 +28,26 @@ my $build = MyModuleBuild->new(
         'YAML::XS'              => 0,
     },
     build_requires          => {
-        'App::FatPacker'        => 0,
         'Test::More'            => 0,
     },
-    script_files => [
-        'script/soapcli.pl',
-    ],
+    script_files => 'script',
     auto_configure_requires => 0,
     create_makefile_pl      => 'traditional',
     create_readme           => 1,
     create_license          => 1,
     recursive_test_files    => 0,
     add_to_cleanup          => [
-        '*.bak', '*.gz', '*.tgz', '*.ppd', '*.ppmx', '*.deb', '*.bat',
-        'Makefile', 'pm_to_blib', 'cover_db', 'Debian_CPANTS.txt',
+        '*.bak', '*.gz', '*.tgz', '*.ppd', '*.ppmx', '*.deb',
+        'pm_to_blib', 'cover_db', 'Debian_CPANTS.txt',
+        'compilet*', 'test-*',
         "$dist-*",
     ],
     meta_merge              => {
         resources               => {
-            bugtracker => "http://rt.cpan.org/NoAuth/Bugs.html?Dist=$dist",
+            bugtracker => "http://github.com/dex4er/soapcli/issues",
             repository => "http://github.com/dex4er/soapcli",
         },
     },
 );
 
 $build->create_build_script;
-

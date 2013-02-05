@@ -10,11 +10,10 @@ examples/globalweather.pl
 examples/globalweather.url
 examples/globalweather.wsdl
 examples/globalweather.yml
-fatlib/.placeholder
+inc/Module/Build/My.pm
 lib/App/soapcli.pm
 MANIFEST			This list of files
 MANIFEST.SKIP
-MyModuleBuild.pm
 README
 README.md
 script/soapcli.pl
